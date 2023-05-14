@@ -63,16 +63,14 @@ delete_all_a PROC
     loop circle
 
     finish:
-        sub di,si 
-        inc di
-        mov dl, arr1[1]
-        xor dh,dh
-        sub dx, di
+        dec si
+        dec si
+        mov dx, si
         mov arr1[1], dl ;entadrenq chap@ poqr e 255 tvic
 
         call print_arr
     
-    pop si dx cx bx
+    pop si dx cx bx ax
     ret
 delete_all_a ENDP
 
