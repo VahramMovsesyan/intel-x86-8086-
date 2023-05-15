@@ -40,7 +40,6 @@ delete_all_a PROC
     mov bl, arr1[1]
     xor bh, bh
 
-    STC
     circle:
         mov al, arr1[si]
         cmp al, "a"
@@ -56,20 +55,25 @@ delete_all_a PROC
             mov ah, arr1[di]
             mov arr1[si], ah
             mov arr1[di], "a"
-            CLC
 
         next_si:
             inc si
     loop circle
 
     finish:
-        dec si
-        dec si
-        mov dx, si
-        mov arr1[1], dl ;entadrenq chap@ poqr e 255 tvic
+        cmp di,2
+        jne a
+        STC
+        jmp b
+        a:
+            CLC
+            dec si
+            dec si
+            mov dx, si
+            mov arr1[1], dl ;entadrenq chap@ poqr e 255 tvic
 
-        call print_arr
-    
+            call print_arr
+        b:
     pop si dx cx bx ax
     ret
 delete_all_a ENDP
