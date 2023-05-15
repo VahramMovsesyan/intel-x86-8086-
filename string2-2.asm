@@ -40,6 +40,7 @@ delete_all_a PROC
     mov bl, arr1[1]
     xor bh, bh
 
+    ; զնագվածի մեջ հանդիող a-երը տանում ենք վերջ abcadefa -> bcdefaaa կամ եթե a չկա՝ bcd -> bcd
     circle:
         mov al, arr1[si]
         cmp al, "a"
@@ -60,17 +61,21 @@ delete_all_a PROC
             inc si
     loop circle
 
+    ;եթե a կա, ապա CF=0 և a-երի քանակով փոքրացնում ենք size-ը
     finish:
+        ; di = 2 այն ժամանակ, երբ a չկա
         cmp di,2
         jne a
         STC
         jmp b
+    
+        ; CF = 0 եթե գոնե մեկ հատ a կա
         a:
             CLC
-            dec si
-            dec si
+            dec si      ; si-ն վերջում ցույց է տալու զանգվածում վերջին տարրի ինդեքս, որը հավասար չէ a-ի
+            dec si      ; si-2 = է a-ից տարբեր տարրերի քանակը
             mov dx, si
-            mov arr1[1], dl ;entadrenq chap@ poqr e 255 tvic
+            mov arr1[1], dl ; ենթադրենք size-ը փոքր է 255-ից
 
             call print_arr
         b:
