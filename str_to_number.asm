@@ -1,6 +1,3 @@
-;0-ների քանակ
-;string to number
-;10-ական
 .model small
 .stack 256
 .data
