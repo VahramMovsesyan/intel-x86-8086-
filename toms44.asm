@@ -210,8 +210,8 @@ change_after_last_a proc
         loop change_loop
 
 fin2:	pop di si cx bx ax
-	pop dx bp
-    ret
+	pop bp
+    ret 4
 change_after_last_a endp
 
 end start
