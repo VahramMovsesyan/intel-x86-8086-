@@ -102,7 +102,7 @@ count2 proc	; ax=number
         loop c1
     
     xor bx,bx       ; count of 0
-    mov bx, 8       ; 8 - count of 1 = count of 0
+    mov bx, 16       ; 8 - count of 1 = count of 0
     sub bx,dx
 
     xor ax,ax 
