@@ -12,24 +12,24 @@ start:
     mov ax,@data
     mov ds,ax
 
-    ; xor si,si
-    ; mov cx,14
-    ; circle:
-    ;     mov ah,10
-    ;     lea dx,num_arr
-    ;     int 21h
+    xor si,si
+    mov cx,14
+    circle:
+        mov ah,10
+        lea dx,num_arr
+        int 21h
 
-    ;     push dx             ; input dx
-    ;     call str_to_number  ; output ax
+        push dx             ; input dx
+        call str_to_number  ; output ax
 
-    ;     ;input ax=number
-    ;     ;output ax=count of number which contain 3 "0" in binary
-    ;     call count2
-    ;     loop circle
+        ;input ax=number
+        ;output ax=count of number which contain 3 "0" in binary
+        call count2
+        loop circle
         
-    ; ;input ax=number
-    ; ;output display on screen
-    ; call outputnumber
+    ;input ax=number
+    ;output display on screen
+    call outputnumber
 
     mov ah,10
     lea dx,str_arr
@@ -185,37 +185,32 @@ change_after_last_a proc
     push ax bx cx si di
 
     mov bx,[bp]
-    xor cx,cx
-	mov cl,[bx+2]   ; cx = arr[1] = count of symbols
-    dec cx          ;for end loop when cx=0
+    mov cx,[bx+2]   ; cx = arr[1] = count of symbols
+                    ;for end loop when cx=0
+    jcxz fin2
+    
     dec cx
     mov si,2
 
-    jcxz fin2
-
     xor ax,ax   ; ax = last index of 'a'
-    xor di,di   ; di = count of symbols after 'a'
     search:
         cmp word ptr [bx+si],'a'
         jne next
             mov ax,si
-            mov di,cx   
         next:
             inc si
             inc si
-            dec cx
         loop search
 
-        mov cx, di
         mov si, ax
         add si,2
-        sub cx,2
+        dec cx
     change_loop:
         mov word ptr [bx+si],'A'
         loop change_loop
 
 fin2:	pop di si cx bx ax
-	pop bp dx
+	pop dx bp
     ret
 change_after_last_a endp
 
