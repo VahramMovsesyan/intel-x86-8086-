@@ -145,7 +145,7 @@ circle1:	mul di		; dx:ax=ax*10=0 /7*10=70...
 
 fin:	pop si di dx cx bx
 	pop bp
-	ret 2
+	ret 4
 str_to_number endp
 
 
